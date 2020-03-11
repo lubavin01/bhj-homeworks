@@ -6,11 +6,24 @@ menuClick = function (event) {
         .filter(item => item !== event.target);
 
     if (siblings.length) {
-        const nodeList = document.querySelectorAll('ul.menu_active');
-        nodeList.forEach(
-            item => item.classList.remove('menu_active'));
+        const newActiveMenu = siblings[0];
 
-        siblings[0].classList.add('menu_active');
+        const nodeList = document.querySelectorAll('ul.menu_active');
+        let oldActiveMenu = null;
+        if (nodeList.length) {
+            oldActiveMenu = nodeList[0];
+            oldActiveMenu.classList.remove('menu_active');            
+        }
+
+        if (oldActiveMenu !== newActiveMenu) {
+            newActiveMenu.classList.add('menu_active');
+        }
+
+
+        // nodeList.forEach(
+        //     item => item.classList.remove('menu_active'));
+
+        // siblings[0].classList.add('menu_active');
         return false;
     }
 }
