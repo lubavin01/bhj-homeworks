@@ -16,15 +16,42 @@ toggleNewClass = (e) => {
     }
 }
 
-fontControls.addEventListener('click', (e) => {
-    const allClasses = ['book_fs-big', 'book_fs-small'];
-    const template = 'book_fs-';
-    const checkClass = 'font-size';
-    const attr = 'size';
+function toggleFont() {
+    allClasses = ['book_fs-big', 'book_fs-small'];
+    template = 'book_fs-';
+    checkClass = 'font-size';
+    attr = 'size';
 
-    const toggle = (e) => {return toggleNewClass(e)}
-    return toggle;
-});
+    return (e) => toggleNewClass(e);
+}
+
+function toggleColor() {
+    allClasses = ['book_color-gray', 'book_color-whitesmoke'];
+    template = 'book_color-';
+    checkClass = 'color';
+    attr = 'color';
+
+    return (e) => toggleNewClass(e);
+}
+
+fontControls.addEventListener('click', toggleFont()); 
+
+colorControls.addEventListener('click', toggleColor()); 
+
+
+
+
+
+
+// fontControls.addEventListener('click', (e) => {
+//     const allClasses = ['book_fs-big', 'book_fs-small'];
+//     const template = 'book_fs-';
+//     const checkClass = 'font-size';
+//     const attr = 'size';
+
+//     const toggle = (e) => {return toggleNewClass(e)}
+//     return toggle;
+// });
 
 // colorControls.addEventListener('click', (e) => {
 //     const allClasses = ['book_color-gray', 'book_color-whitesmoke'];
