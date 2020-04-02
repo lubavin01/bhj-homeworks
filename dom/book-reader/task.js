@@ -1,9 +1,11 @@
+'use strict';
+
 const book = document.getElementById('book');
 const fontControls = document.querySelector('.book__control_font-size');
 const colorControls = document.querySelector('.book__control_color');
 const bgControls = document.querySelector('.book__control_background');
 
-toggleNewClass = (e) => {
+function toggleNewClass(e) {
     e.preventDefault();
     if (!e.target.classList.contains(checkClass)) {
         return;
@@ -17,26 +19,32 @@ toggleNewClass = (e) => {
 }
 
 function toggleFont() {
-    allClasses = ['book_fs-big', 'book_fs-small'];
-    template = 'book_fs-';
-    checkClass = 'font-size';
-    attr = 'size';
 
-    return (e) => toggleNewClass(e);
+    let allClasses = ['book_fs-big', 'book_fs-small'];
+    let template = 'book_fs-';
+    let checkClass = 'font-size';
+    let attr = 'size';
+    let counter = 0;
+
+    return (e) => { 
+        let counter = 0;
+        return toggleNewClass(e)};
 }
 
 function toggleColor() {
-    allClasses = ['book_color-gray', 'book_color-whitesmoke'];
-    template = 'book_color-';
-    checkClass = 'color';
-    attr = 'color';
+    let allClasses = ['book_color-gray', 'book_color-whitesmoke'];
+    let template = 'book_color-';
+    let checkClass = 'color';
+    let attr = 'color';
 
-    return (e) => toggleNewClass(e);
+    return function (e) { return toggleNewClass(e) };
 }
 
-fontControls.addEventListener('click', toggleFont()); 
+fontControls.addEventListener('click', toggleFont());
+//fontControls.onClick = toggleFont();
 
-colorControls.addEventListener('click', toggleColor()); 
+colorControls.addEventListener('click', toggleColor());
+//colorControls.onClick = toggleFont();
 
 
 
