@@ -99,7 +99,7 @@ const drawTrace = (senderBlock, recieverBlock) => {
             let quantity = parseInt(div.innerText);
 
             quantity += delta;
-            if (quantity < 0) { quantity = 0 };
+            if (quantity < 1) { quantity = 1 };
             div.innerText = quantity;
         }
     });

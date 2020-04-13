@@ -7,39 +7,50 @@ const tasksList = document.getElementById('tasks__list');
 
 
 const innerHtml = (text) => {
-    return `<div class="task__title">
+    return (
+    `<div class="task__title">
         ${text}
     </div>
-    <a href="#" class="task__remove">&times;</a>`;
+    <a href="#" class="task__remove">&times;</a>`
+    );
 }
 
 const createTask = (text) => {
-    const clonedTask = newTaskTemplate.cloneNode();    
-    clonedTask.innerHTML = innerHtml(text); 
-    tasksList.appendChild(clonedTask);
+    const clonedTask = newTaskTemplate.cloneNode();
+    clonedTask.innerHTML = innerHtml(text);
+    tasksList.appendChild(clonedTask);    
+}
 
-    localStorage.setItem('netology_tasksList_innerHTML', tasksList.innerHTML);
-} 
+const setCache = () => {
+    const tasksArray = [...tasksList.children].map(i => i.children[0].textContent.trim());
+    localStorage.setItem('netology_tasksList_tasksArray', JSON.stringify(tasksArray) );
+}
 
 window.onload = () => {
-    const cache = localStorage.getItem('netology_tasksList_innerHTML');
-    if (cache) {
-        tasksList.innerHTML = cache;
-    }
+    try {
+        const tasksArray = JSON.parse(localStorage.getItem('netology_tasksList_tasksArray') );
+        if ( Array.isArray(tasksArray) ) {
+            tasksArray.forEach(i => createTask(i) );            
+        }
+
+    } catch {}  
+    
 };
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    createTask(taskInput.value) ;
+    createTask(taskInput.value);
 
-    e.target.reset();    
-} );
+    setCache();   
+
+    e.target.reset();
+});
 
 tasksList.addEventListener('click', (e) => {
     if (!e.target.matches('.task__remove')) return;
 
     tasksList.removeChild(e.target.parentElement);
 
-    localStorage.setItem('netology_tasksList_innerHTML', tasksList.innerHTML);
+    setCache()
 })
